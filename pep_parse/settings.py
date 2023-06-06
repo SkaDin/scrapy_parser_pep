@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).parent.parent
 # Я предпочёл бы поставить текущую дату,
 # но тесты против , поэтому тут дата -3 часа
 FEEDS = {
-    f'results/pep_%(time)s.csv': {
+    'results/pep_%(time)s.csv': {
         'format': 'csv',
         'fields': ['number', 'name', 'status'],
         'overwrite': True
