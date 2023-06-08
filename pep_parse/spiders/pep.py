@@ -8,16 +8,19 @@ class PepSpider(scrapy.Spider):
 
     name = 'pep'
     allowed_domains = ['peps.python.org']
-    start_urls = ['https://peps.python.org/']
+    start_urls = ['https://peps.python.org/', ]
 
     def parse(self, response):
         """Метод, загружающий и обрабатывающий ссылки на PEP."""
         pep_links = response.xpath(
-            '//a[@class="pep reference internal"]/@href'
+            '//table//tbody//a[@class="pep reference internal"]/@href'
         )
-        for pep_link in range(1, len(pep_links) - 2, 2):
+        for pep_link in pep_links:
+            url = response.urljoin(pep_link.get())
+            if not url.endswith('/'):
+                url += '/'
             yield response.follow(
-                pep_links[pep_link],
+                pep_link,
                 callback=self.parse_pep
             )
 

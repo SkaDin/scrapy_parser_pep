@@ -11,8 +11,6 @@ ROBOTSTXT_OBEY = True
 
 BASE_DIR = Path(__file__).parent.parent
 
-# Я предпочёл бы поставить текущую дату,
-# но тесты против , поэтому тут дата -3 часа
 FEEDS = {
     'results/pep_%(time)s.csv': {
         'format': 'csv',
